@@ -1,0 +1,8 @@
+--- # For Lookup
+- hosts: apacheweb
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - debug: msg="env variable is {{ lookup('env','HOME') }}"

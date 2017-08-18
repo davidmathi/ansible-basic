@@ -1,0 +1,21 @@
+--- # until use
+- hosts: appserver
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install Web Server
+      yum: pkg=httpd state=installed
+    - name: Check whether running
+      command: systemctl status httpd
+      register: output_var
+      notify: 
+        - start server
+      until: output_var.stdout.find("active (running) ") != -1
+      retries: 5
+      delay: 5
+    - debug: var=output_var
+  handlers: 
+    - name: start server
+      service: name=httpd state=restarted

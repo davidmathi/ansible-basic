@@ -1,0 +1,12 @@
+--- # Run Once Program
+- hosts: all
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Run Uptime command on all hosts and log it
+      raw: /usr/bin/uptime >> /home/ansi/uptime.log
+    - name: List the /var directory and log it
+      raw: ls -al /var >> /home/ansi/dir.list
+      run_once: true

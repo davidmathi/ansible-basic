@@ -1,0 +1,10 @@
+--- # Include example
+- hosts: apacheweb
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - include: plays/packages.yml
+    - name: verify telnet
+      raw: yum list installed | grep telnet > /home/ansi/pkgs.log

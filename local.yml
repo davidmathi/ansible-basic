@@ -1,0 +1,8 @@
+--- # local actions test
+- hosts: local
+  become: true
+  connection: local
+  tasks: 
+    - name: Install Telnet Client
+      yum: pkg=telnet state=latest
+

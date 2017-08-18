@@ -1,0 +1,19 @@
+--- # test tags
+- hosts: apacheweb
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install telnet and lynx
+      yum: pkg={{ item }} state=installed
+      ignore_errors: no
+      with_items:
+        - telet
+        - lynx
+      tags:
+        - packages
+    - name: verify installaation
+      raw: yum list installed | grep telnet > /home/ansi/pkg.log
+      tags: 
+        - always

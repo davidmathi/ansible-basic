@@ -1,0 +1,5 @@
+- name: Install telnet
+  yum: pkg=telnet state=installed
+- name: Install lynx
+  yum: pkg=lynx state=installed
+

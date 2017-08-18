@@ -1,0 +1,9 @@
+--- # pass variales in command line
+- hosts: '{{ host_name }}'
+  user: '{{ user_name }}'
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Install a Package
+      yum: pkg={{ pkg_name }} state=installed 
