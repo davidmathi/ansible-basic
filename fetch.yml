@@ -1,0 +1,9 @@
+--- # Fetch tutorial
+- hosts: all
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: fetching file info
+      fetch: src=/etc/hosts dest=/home/ansi/prefix-{{ ansible_hostname }} flat=yes

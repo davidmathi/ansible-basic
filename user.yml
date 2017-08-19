@@ -1,0 +1,10 @@
+--- # User module test
+- hosts: apacheweb
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: create an user
+      user: name='david1' state=absent remove=yes
+

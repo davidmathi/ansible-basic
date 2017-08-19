@@ -1,0 +1,13 @@
+--- # Stat example
+- hosts: apacheweb
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: no
+  tasks:
+    - name: Does a file or directory exists
+      stat: path=/home/ansi/abc
+      register: p
+    - debug: msg="The Path Exists and is a Directory"
+      when: p.stat.isdir is defined and p.stat.isdir
+
