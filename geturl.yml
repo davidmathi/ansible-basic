@@ -1,0 +1,14 @@
+--- #When i.e conditional statements
+- hosts: ubuntu
+  user: ansi
+  become: true
+  connection: ssh
+  gather_facts: yes
+  vars:
+    playbook_type: conditional
+  vars_files:
+    - conf/copyright.yml
+    - conf/webdefaults.yml
+  tasks:
+    - name: Get and download the INI file from the web server
+      get_url: url=http://dmathi2.mylabserver.com/mytest.ini dest=/home/ansi/mytest.ini mode=0440 

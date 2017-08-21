@@ -1,0 +1,13 @@
+--- # testing ail
+- hosts: apacheweb
+  user: ansi
+  connection: ssh
+  gather_facts: yes
+  tasks:
+    - name: sending mail
+      mail: 
+        host='localhost'   
+        port=25
+        to='ansi'
+        subject="Our Host is Finished Developing"
+        body='System called {{ ansible_hostname }} has been successfully setup'

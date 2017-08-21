@@ -1,0 +1,30 @@
+--- #When i.e conditional statements
+- hosts: apacheweb
+  user: ansi
+  become: true
+  connection: ssh
+  gather_facts: yes
+  vars:
+    playbook_type: conditional
+  vars_files:
+    - conf/copyright.yml
+    - conf/webdefaults.yml
+  tasks:
+    - name: Executing a remote command
+      shell: /usr/bin/uptime >> utime.log
+      args:
+        chdir: logs/
+        creates: utime.log
+    - name: install Apache to ubuntu
+      command: apt -y install apache2
+      when: ansible_os_family == 'Debian'
+      notify: restart apache ubuntu
+    - name: install Apache to centos
+      command: yum -y install httpd
+      when: ansible_os_family == 'RedHat'
+      notify: restart apache centos
+  handlers:
+    - name: restart apache ubuntu
+      service: name=apache2 state=restarted
+    - name: restart apache centos
+      service: name=httpd state=restarted
