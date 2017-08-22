@@ -1,0 +1,13 @@
+--- # testign J2 Template module
+- hosts: apacheweb:ubuntu
+  connection: ssh
+  user: ansi
+  become: yes
+  gather_facts: yes
+  vars: 
+    userName: test
+    userPassword: password123
+    connectionType: SFTP
+  tasks:
+    - name: Install configuration file customised for the ssytem
+      template: src=test.conf.j2 dest=/home/ansi/test.conf owner=ansi group=ansi mode=750 

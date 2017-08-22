@@ -1,0 +1,22 @@
+--- # My First Yaml Playbook 
+- hosts: apacheweb
+  user: ansi
+  become: yes
+  connection: ssh
+  gather_facts: no
+  vars:
+    playbook_version: 0.1b
+  vars_files:
+    - conf/copyright.yml
+    - conf/webdefaults.yml
+  vars_prompt:
+    - name: pkg_name
+      prompt: Enter Package name
+  tasks:
+    - name: Checking out a git repo on remote sever
+      git: repo=ssh://ansi@dmathi3/home/ansi/testrepo dest=/home/ansi/gitrepo accept_hostkey=yes
+
+
+
+
+
